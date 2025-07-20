@@ -9,87 +9,85 @@
     body {
       margin: 0;
       font-family: 'Helvetica Neue', sans-serif;
-      background: #f2f4f1;
+      background: #f4f7f8;
       color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2em;
     }
-    .container {
-      background: white;
-      padding: 2em;
-      border-radius: 12px;
-      max-width: 800px;
-      width: 100%;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    header {
+      background-color: #4CAF50;
+      padding: 2rem;
       text-align: center;
+      color: white;
     }
-    h1 {
+    header h1 {
+      margin: 0;
       font-size: 2.5rem;
-      margin-bottom: 0.5em;
     }
-    p {
-      font-size: 1.1rem;
-      margin: 0.5em 0;
+    section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
     }
     .countdown {
-      font-size: 2rem;
-      font-weight: bold;
-      margin: 1em 0;
-      color: #2a7f62;
-    }
-    .price-tag {
       font-size: 1.5rem;
-      margin: 1em 0;
-      color: #2a7f62;
+      margin: 1rem 0;
+      text-align: center;
+      color: #4CAF50;
+    }
+    .box-items {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .box-items h2 {
+      color: #4CAF50;
+    }
+    .box-items ul {
+      padding-left: 1.2rem;
+    }
+    .price {
+      font-size: 2rem;
+      color: #4CAF50;
+      text-align: center;
+      margin: 1.5rem 0;
     }
     .signup {
-      margin-top: 2em;
+      text-align: center;
     }
-    input[type="email"] {
-      padding: 0.7em;
+    .signup input[type="email"] {
+      padding: 0.8rem;
       width: 70%;
       max-width: 300px;
-      border-radius: 6px;
+      border-radius: 4px;
       border: 1px solid #ccc;
-      margin-right: 0.5em;
     }
-    button {
-      padding: 0.7em 1.2em;
-      background: #2a7f62;
-      color: white;
+    .signup button {
+      padding: 0.8rem 1.2rem;
+      margin-left: 0.5rem;
+      background-color: #4CAF50;
       border: none;
-      border-radius: 6px;
+      color: white;
+      border-radius: 4px;
       cursor: pointer;
     }
-    .items {
-      text-align: left;
-      margin-top: 2em;
-    }
-    .items ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-    .footer {
-      margin-top: 2em;
-      font-size: 0.9rem;
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      padding: 1rem;
       color: #777;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to The Consciously Clean Club</h1>
-    <p>Eco-friendly, non-toxic cleaning made simple.</p>
-    <div class="countdown" id="countdown"></div>
-    <p class="price-tag">Founder Launch Price: <strong>$34.99/month</strong></p>
-    <div class="signup">
-      <input type="email" placeholder="Enter your email" />
-      <button>Join the Waitlist</button>
-    </div>
-    <div class="items">
-      <h3>What’s Inside the Box?</h3>
+  <header>
+    <h1>The Consciously Clean Club</h1>
+    <p>Eco-friendly, non-toxic cleaning essentials delivered to your door.</p>
+  </header>
+  <section>
+    <div class="countdown" id="countdown">Launching in 21 days...</div>
+
+    <div class="box-items">
+      <h2>What’s in the Box?</h2>
       <ul>
         <li>Foaming Hand Soap (1 Forever Bottle + 1 Refill Tablet)</li>
         <li>Dishwasher Detergent (1 Forever Tin + 60 Refill Tablets)</li>
@@ -101,9 +99,18 @@
         <li>Glass + Mirror Cleaner (1 Forever Bottle + 1 Refill Tablet)</li>
       </ul>
     </div>
-    <div class="footer">Launching soon – be the first to clean consciously.</div>
-  </div>
+
+    <div class="price">Founder's Launch Price: $34.99/month</div>
+
+    <div class="signup">
+      <input type="email" placeholder="Enter your email" />
+      <button>Join the Waitlist</button>
+    </div>
+  </section>
+  <footer>&copy; 2025 The Consciously Clean Club</footer>
+
   <script>
+    // Countdown timer to 21 days from today
     const launchDate = new Date();
     launchDate.setDate(launchDate.getDate() + 21);
     const countdownEl = document.getElementById("countdown");
@@ -111,22 +118,12 @@
     function updateCountdown() {
       const now = new Date();
       const diff = launchDate - now;
-
-      if (diff <= 0) {
-        countdownEl.innerText = "We’re live!";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      countdownEl.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      countdownEl.innerText = `Launching in ${days} day${days !== 1 ? 's' : ''}...`;
     }
 
-    setInterval(updateCountdown, 1000);
     updateCountdown();
+    setInterval(updateCountdown, 1000 * 60 * 60); // update every hour
   </script>
 </body>
 </html>
